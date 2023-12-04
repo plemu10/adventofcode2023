@@ -10,7 +10,7 @@ input.each_with_index do |line, line_index|
         if character.match?(/[[:digit:]]/) || character == "."
             #puts "Do nothing"
         else
-            #puts "Symbol found #{character} so do stuff probably"
+            puts "Symbol found #{character} so do stuff probably"
             #Check Up
             temp = input[line_index - 1].split('')
             #puts temp[character_index]
@@ -27,9 +27,9 @@ input.each_with_index do |line, line_index|
             end
 
             #Check Right
-            if character[character_index + 1].match?(/[[:digit:]]/)
+            if row[character_index + 1].match?(/[[:digit:]]/)
                 #find a number and then add it to the answer
-                puts "There is a number to the upper right"
+                puts "There is a number to the right"
             end
 
             #Check Right-Down
@@ -57,7 +57,7 @@ input.each_with_index do |line, line_index|
             end
 
             #Check Left
-            if character[character_index + 1].match?(/[[:digit:]]/)
+            if row[character_index - 1].match?(/[[:digit:]]/)
                 #find a number and then add it to the answer
                 puts "There is a number to the left"
             end
@@ -65,9 +65,20 @@ input.each_with_index do |line, line_index|
             #Check Left-Up
             temp = input[line_index - 1].split('')
             #puts temp[character_index]
-            if temp[character_index + 1].match?(/[[:digit:]]/)
+            if temp[character_index - 1].match?(/[[:digit:]]/)
                 #find a number and then add it to the answer
                 puts "There is a number to the upper left"
+                counter = character_index - 1
+                while temp[counter].match?(/[[:digit:]]/)
+                   counter += -1 
+                end
+                counter += 1
+                number = ""
+                while temp[counter].match?(/[[:digit:]]/)
+                    number = number + temp[counter]
+                    counter += 1
+                end
+                answer += number.to_i
             end
 
         end
